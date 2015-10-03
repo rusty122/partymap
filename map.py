@@ -20,7 +20,7 @@ def mapview():
         markers={'http://maps.google.com/mapfiles/ms/icons/green-dot.png':[(37.4419, -122.1419)],
                  'http://maps.google.com/mapfiles/ms/icons/blue-dot.png':[(37.4300, -122.1400)]}
     )
-    return render_template('example.html', mymap=mymap, sndmap=sndmap)
+    return render_template('map.html', mymap=mymap, sndmap=sndmap)
     
 if __name__ == '__main__':
     app.run(debug=True)
