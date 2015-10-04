@@ -1,3 +1,4 @@
+var map = null;
 function initialize() {
 
   	var customMapType = new google.maps.StyledMapType([
@@ -35,7 +36,7 @@ function initialize() {
 
     var mapCanvas = document.getElementById('map');
 
-    var map = new google.maps.Map(mapCanvas, mapOptions)
+    map = new google.maps.Map(mapCanvas, mapOptions)
 
     var geolocation = navigator.geolocation;
     if (navigator.geolocation) {
@@ -53,40 +54,47 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 var people = [
-    [43.7, -71.3],
+    [43.705342, -72.288601],
     [42, -70]
 ];
 
 function setMarkers(map) {
-    var image = {
-        url: 'static/img/MapPinNormal.png',
-        size: new google.maps.Size(20, 32),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(0, 32)
-    };
-
+//    var image = {
+//        url: 'static/img/MapPinNormal.png',
+        //size: new google.maps.Size(20, 32)
+//        origin: new google.maps.Point(0, 0),
+//        anchor: new google.maps.Point(0, 32)
+    //};
+    console.log("hello");
     for (var i = 0; i < people.length; i++) {
         var person = people[i];
+        console.log(JSON.stringify(person));
+        map.setCenter({lat: person[0], lng:person[1]});
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
         var marker = new google.maps.Marker({
-            position: {lat: person[0], lng: person[1]},
+            icon: 'static/img/MapPinNormal3.png',
+            position: {lat:person[0], lng:person[1]},
             map: map,
-            icon: image,
-//            zIndex: person[2] //put time instead here
-        });
+            title: 'Hello World!'
+         });
+//        var marker = new google.maps.Marker({
+//            position: {lat: person[0], lng: person[1]},
+//            map: map,
+//            icon: image
+
+//        });
     }
 }
 
+//            zIndex: person[2] //put time instead here
 
 google.maps.event.addDomListener(window, 'load', initialize);
-//
-//
-
 
 /*
 var locNew = document.getElementById('recenter');
-locNew.onclick = initialize();*/
+locNew.onclick = initialize();
 
-//getLoc = getElementById('recenter');
-//getLoc.onclick = recenter();
-
+getLoc = getElementById('recenter');
+getLoc.onclick = recenter();
+*/
 
