@@ -35,6 +35,13 @@ def data():
         data.append({"lat":lat, "long":long, "type":type})
     return json.dumps(data)
 
+@app.route('/postloc')
+def postloc():
+      lat = request.args.get('lat', 0, type=float)
+      lon = request.args.get('lon', 0, type=float)
+      # add data to the database
+      return
+
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
