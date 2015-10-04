@@ -29,7 +29,7 @@ function initialize() {
     var mapOptions = {
         
         center: new google.maps.LatLng(43.705342, -71.288601),
-        zoom: 16,
+        zoom: 17,
 
         mapTypeControlOptions: {
       		mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
@@ -72,7 +72,6 @@ function setMarkers(map) {
         var person = people[i];
         console.log(JSON.stringify(person));
         map.setCenter({lat: person[0], lng:person[1]});
-        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
         var marker = new google.maps.Marker({
             icon: 'static/img/MapPinNormal3.png',
             position: {lat:person[0], lng:person[1]},
