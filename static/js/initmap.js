@@ -1,4 +1,6 @@
-var map = null;
+
+var map = null; 
+
 function initialize() {
 
   	var customMapType = new google.maps.StyledMapType([
@@ -98,3 +100,14 @@ getLoc = getElementById('recenter');
 getLoc.onclick = recenter();
 */
 
+
+function recenterLoc(){
+	var geolocation = navigator.geolocation;
+	    if (navigator.geolocation) {
+	         navigator.geolocation.getCurrentPosition(function (position) {
+	             initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	             console.log('Hi'); 
+	             map.setCenter(initialLocation);
+	         });
+	    }
+}
