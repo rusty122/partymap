@@ -8,8 +8,7 @@ window.onload = function() {
 
     var geoSuccess = function(position) {
         startPos = position;
-        //console.log(position.coords.latitude,position.coords.longitude);
-        //ajax post
+        // post data asynchronously
         var mapOptions = {
             center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
             zoom: 16,
@@ -44,22 +43,3 @@ window.onload = function() {
     };
     navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
 };
-
-// <script type=text/javascript>
-//   $(function() {
-//     $('a#calculate').bind('click', function() {
-//       $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
-//         a: $('input[name="a"]').val(),
-//         b: $('input[name="b"]').val()
-//       }, function(data) {
-//         $("#result").text(data.result);
-//       });
-//       return false;
-//     });
-//   });
-// </script>
-// <h1>jQuery Example</h1>
-// <p><input type=text size=5 name=a> +
-//    <input type=text size=5 name=b> =
-//    <span id=result>?</span>
-// <p><a href=# id=calculate>calculate server side</a>

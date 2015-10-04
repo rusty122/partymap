@@ -13,12 +13,6 @@ GoogleMaps(app)
 def connect_db():
     return sqlite3.connect(DATABASE)
 
-# def get_db():
-#     db = getattr(g, '_database', None)
-#     if db is None:
-#         db = g._database = connect_to_database()
-#     return db
-
 def insert(table, fields=(), values=()):
     # g.db is the database connection
     cur = g.db.cursor()
@@ -52,17 +46,8 @@ def data():
 
 @app.route('/postloc', methods=['POST'])
 def postloc():
-    #   lat = request.args.get('lat', 0, type=float)
-    #   lon = request.args.get('lon', 0, type=float)
-    #   print lat
-    #   print lon
-      # print(request.get_json())
-      # g.db.execute('INSERT INTO data (type, lat, long) VALUES ()')
-      # add data to the database
       data = request.get_json()
       insert('data', ('type', 'lat', 'long'), (data['type'], data['lat'], data['lon']))
-    #   g.db.execute("""INSERT INTO data (type, lat, long)
-    #                   VALUES (%s)""", (data['type'], data['lat'], data['lon']))
       return 'OK'
 
 @app.teardown_appcontext
