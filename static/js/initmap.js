@@ -15,6 +15,23 @@ window.onload = function() {
             zoom: 16,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
+
+        // Get request
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            console.log(xmlHttp.responseText);
+        }
+        var data = {lat: position.coords.latitude,
+                    lon: position.coords.longitude,
+                    type: "party"}
+        xmlHttp.open("POST", 'postloc', true); // true for asynchronous
+        xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlHttp.send(JSON.stringify({lat: position.coords.latitude,
+                                     lon: position.coords.longitude,
+                                     type: "party"}));
+
+        // draw map
         var map = new google.maps.Map(mapCanvas, mapOptions)
     };
     var geoError = function(error) {

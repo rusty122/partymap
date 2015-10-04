@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for
 from flask import g
 from flask.ext.googlemaps import GoogleMaps
 from flask.ext.googlemaps import Map
@@ -19,6 +19,21 @@ def connect_db():
 #         db = g._database = connect_to_database()
 #     return db
 
+def insert(table, fields=(), values=()):
+    # g.db is the database connection
+    cur = g.db.cursor()
+    query = 'INSERT INTO %s (%s) VALUES (%s)' % (
+        table,
+        ', '.join(fields),
+        ', '.join(['?'] * len(values))
+    )
+    cur.execute(query, values)
+    g.db.commit()
+    id = cur.lastrowid
+    cur.close()
+    return id
+
+
 @app.before_request
 def before_request():
     g.db = connect_db()
@@ -35,12 +50,20 @@ def data():
         data.append({"lat":lat, "long":long, "type":type})
     return json.dumps(data)
 
-@app.route('/postloc')
+@app.route('/postloc', methods=['POST'])
 def postloc():
-      lat = request.args.get('lat', 0, type=float)
-      lon = request.args.get('lon', 0, type=float)
+    #   lat = request.args.get('lat', 0, type=float)
+    #   lon = request.args.get('lon', 0, type=float)
+    #   print lat
+    #   print lon
+      # print(request.get_json())
+      # g.db.execute('INSERT INTO data (type, lat, long) VALUES ()')
       # add data to the database
-      return
+      data = request.get_json()
+      insert('data', ('type', 'lat', 'long'), (data['type'], data['lat'], data['lon']))
+    #   g.db.execute("""INSERT INTO data (type, lat, long)
+    #                   VALUES (%s)""", (data['type'], data['lat'], data['lon']))
+      return 'OK'
 
 @app.teardown_appcontext
 def close_connection(exception):
