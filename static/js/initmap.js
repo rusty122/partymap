@@ -8,8 +8,6 @@ window.onload = function() {
 
     var geoSuccess = function(position) {
         startPos = position;
-        //document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-        //document.getElementById('startLon').innerHTML = startPos.coords.longitude;
         //console.log(position.coords.latitude,position.coords.longitude);
         //ajax post
         var mapOptions = {
@@ -29,22 +27,6 @@ window.onload = function() {
     };
     navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
 };
-
-//google.maps.event.addDomListener(window, 'load', initialize);
-
-
-
-
-// window.onload = function() {
-//   var startPos;
-//   var geoSuccess = function(position) {
-//     startPos = position;
-//     document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-//     document.getElementById('startLon').innerHTML = startPos.coords.longitude;
-//   };
-//   navigator.geolocation.getCurrentPosition(geoSuccess);
-// };
-
 
 // <script type=text/javascript>
 //   $(function() {
