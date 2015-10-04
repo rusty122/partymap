@@ -1,3 +1,5 @@
+var map = null; 
+
 function initialize() {
 
   	var customMapType = new google.maps.StyledMapType([
@@ -35,10 +37,21 @@ function initialize() {
 
     var mapCanvas = document.getElementById('map');
 
-    var map = new google.maps.Map(mapCanvas, mapOptions)
+    map = new google.maps.Map(mapCanvas, mapOptions)
 
     map.mapTypes.set(customMapTypeId, customMapType);
 	map.setMapTypeId(customMapTypeId);
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 
+
+function recenterLoc(){
+	var geolocation = navigator.geolocation;
+	    if (navigator.geolocation) {
+	         navigator.geolocation.getCurrentPosition(function (position) {
+	             initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	             console.log('Hi'); 
+	             map.setCenter(initialLocation);
+	         });
+	    }
+}
