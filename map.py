@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask.ext.googlemaps import GoogleMaps
 from flask.ext.googlemaps import Map
+
 import json
 
 app = Flask(__name__, template_folder=".")
