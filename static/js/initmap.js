@@ -1,5 +1,12 @@
 var map = null;
 
+var people = [
+// test people right now, to populate with database info
+    {lat: 43.705342, lng: -72.288601},
+ //   {lat: 42, lng: -70}
+    {lat: 42.407857, lng: -71.1209772}
+];
+
 function initialize() {
 
   	var customMapType = new google.maps.StyledMapType([
@@ -26,7 +33,7 @@ function initialize() {
 
     var mapOptions = {
         center: new google.maps.LatLng(43.705342, -71.288601),
-        zoom: 16,
+        zoom: 17,
         streetViewControl: false,
         mapTypeControl: false
     }
@@ -36,26 +43,19 @@ function initialize() {
     map = new google.maps.Map(mapCanvas, mapOptions)
 
     var geolocation = navigator.geolocation;
-    if (navigator.geolocation) {
-         navigator.geolocation.getCurrentPosition(function (position) {
-             initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-             map.setCenter(initialLocation);
-         });
-    }
+
+    recenterLoc();
 
     map.mapTypes.set(customMapTypeId, customMapType);
 	  map.setMapTypeId(customMapTypeId);
+    console.log(people);
 
     setMarkers(map);
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
-var people = [
-// test people right now, to populate with database info
-    [43.705342, -72.288601],
-    [42, -70]
-];
+
 
 function setMarkers(map) {
 //    var image = {
@@ -65,17 +65,19 @@ function setMarkers(map) {
 //        anchor: new google.maps.Point(0, 32)
     //};
     console.log("hello");
+    console.log(people);
     for (var i = 0; i < people.length; i++) {
-        var person = people[i];
-        console.log(JSON.stringify(person));
-        map.setCenter({lat: person[0], lng:person[1]});
+        // var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+
         var marker = new google.maps.Marker({
             icon: 'static/img/MapPinNormal3.png',
-            position: {lat:person[0], lng:person[1]},
+            position: people[i],
             map: map,
          });
+        console.log(i);
 
     }
+
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -85,8 +87,26 @@ function recenterLoc(){
 	var geolocation = navigator.geolocation;
 	    if (navigator.geolocation) {
 	         navigator.geolocation.getCurrentPosition(function (position) {
-	             initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-	             map.setCenter(initialLocation);
+	             var currPos = {
+                lat: position.coords.latitude, 
+                lng: position.coords.longitude
+               };
+               console.log("dsafdf");
+               people.push(currPos);
+
+	             map.setCenter(currPos);
 	         });
+
 	    }
+
 }
+
+/*
+function addLoc() {
+  var geolocation = navigator.geolocation
+}
+*/
+
+
+
+
