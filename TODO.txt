@@ -1,0 +1,32 @@
+TODO next:
+1. tagging
+2. display current location (blue dot)(might not need)
+3. use and pull from database (ajax)
+4. push to live domain
+…this gets our basic shell
+
+AND THEN:
+1. Facebook Integration
+         1. order friends by proximity (privacy?)
+         2. see online status (privacy?)
+         3. custom extra icon for fb friends // DY: I only want this from fb
+2. clustering
+    1. transfer algorithm to javascript somehow
+    2. draw circles and remove single pins (no loners) // DY:
+4. Location based feeds (+ clustering)
+    1. new “feed” object
+    2. posting method
+    3. record time elapsed
+    4. downvote off?
+6. single person can tag a cluster
+    1. voting mechanism to assess accurate tagging?
+7. iOS!!!!!
+    1. a lot of stuff here we need to figure out
+8. ACTUAL LAUNCH/beta (FIX STUFF)
+  
+ADDONS (all based on user feedback):
+(note: KEEP IT SIMPLE. USERS WANT SIMPLICITY)
+1. Private Messaging
+2. Notifications for location-based stuff
+3. video clips/ media (based on user feedback)
+4. event creation (open invites)
